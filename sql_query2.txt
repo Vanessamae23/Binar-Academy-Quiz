@@ -1,0 +1,102 @@
+QUIZ 2
+
+postgres=# CREATE DATABASE book_store;
+CREATE DATABASE
+
+postgres=# CREATE TABLE books (
+postgres(# id BIGSERIAL PRIMARY KEY,
+postgres(# name VARCHAR(100) NOT NULL,
+postgres(# author VARCHAR(50) NOT NULL,
+postgres(# price INTEGER NOT NULL,
+postgres(# is_publish BOOLEAN DEFAULT FALSE
+postgres(# );
+CREATE TABLE
+
+book_store=# INSERT INTO BOOKS (
+book_store(# name,
+book_store(# author,
+book_store(# price,
+book_store(# is_publish
+book_store(# ) VALUES ('The Intelligent Investor', 'Benjamin Graham', 175500, true);
+INSERT 0 1
+book_store=# INSERT INTO BOOKS (
+book_store(# name,
+book_store(# author,
+book_store(# price,
+book_store(# is_publish
+book_store(# ) VALUES ('Segala Galanya Amyar', 'Mark Manson', 111000, FALSE);
+INSERT 0 1
+book_store=# INSERT INTO BOOKS (
+book_store(# name,
+book_store(# author,
+book_store(# price,
+book_store(# is_publish
+book_store(# ) VALUES ('Rich Dad Poor Dad', 'Robert T. Kiyosaki', 54400, FALSE);
+INSERT 0 1
+book_store=# INSERT INTO BOOKS (
+book_store(# name,
+book_store(# author,
+book_store(# price,
+book_store(# is_publish
+book_store(# ) VALUES ('Novel Bulan', 'Tere Liye', 76000, TRUE);
+INSERT 0 1
+book_store=# INSERT INTO BOOKS (
+book_store(# name,
+book_store(# author,
+book_store(# price,
+book_store(# is_publish
+book_store(# ) VALUES ('You Do You', 'Fellexandro Ruby', 102400, TRUE);
+INSERT 0 1
+book_store=# INSERT INTO BOOKS (
+book_store(# name,
+book_store(# author,
+book_store(# price,
+book_store(# is_publish
+book_store(# ) VALUES ('Start With Why', 'Simon Sinek', 80000, TRUE);
+INSERT 0 1
+
+book_store=# SELECT name, author, price FROM books;
+           name           |       author       | price
+--------------------------+--------------------+--------
+ The Intelligent Investor | Benjamin Graham    | 175500
+ Segala Galanya Amyar     | Mark Manson        | 111000
+ Rich Dad Poor Dad        | Robert T. Kiyosaki |  54400
+ Novel Bulan              | Tere Liye          |  76000
+ You Do You               | Fellexandro Ruby   | 102400
+(5 rows)
+
+book_store=# SELECT * FROM books WHERE books.price >= 80000;
+ id |           name           |      author      | price  | is_publish
+----+--------------------------+------------------+--------+------------
+  1 | The Intelligent Investor | Benjamin Graham  | 175500 | t
+  2 | Segala Galanya Amyar     | Mark Manson      | 111000 | f
+  5 | You Do You               | Fellexandro Ruby | 102400 | t
+(3 rows)
+
+book_store=# SELECT * FROM books WHERE name LIKE '%Rich%';
+ id |       name        |       author       | price | is_publish
+----+-------------------+--------------------+-------+------------
+  3 | Rich Dad Poor Dad | Robert T. Kiyosaki | 54400 | f
+(1 row)
+
+book_store=# UPDATE books
+book_store-# SET
+book_store-# price = 180000,
+book_store-# is_publish = true
+book_store-# WHERE books.author = 'Simon Sinek';
+UPDATE 1
+book_store=#
+
+book_store=# DELETE FROM books WHERE books.name = 'Novel Bulan';
+DELETE 1
+
+book_store=# SELECT * FROM books ORDER BY price ASC;
+ id |           name           |       author       | price  | is_publish
+----+--------------------------+--------------------+--------+------------
+  1 | The Intelligent Investor | Benjamin Graham    | 180000 | t
+  2 | Segala Galanya Amyar     | Mark Manson        | 180000 | t
+  3 | Rich Dad Poor Dad        | Robert T. Kiyosaki | 180000 | t
+  5 | You Do You               | Fellexandro Ruby   | 180000 | t
+  6 | Start With Why           | Simon Sinek        | 180000 | t
+(5 rows)
+// Tadi sempet ke update semua price nya
